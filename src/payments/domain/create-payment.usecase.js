@@ -7,7 +7,7 @@ export function createPaymentUsecaseFactory(accountRepository) {
         if (debitAccount.balance < amount) throw new InsufficientBalanceError(debitAccountNumber)
 
         const creditAccount = await accountRepository.get(creditAccountNumber)
-        if (!creditAccount)  throw new AccountNoFoundError(creditAccountNumber)
+        if (!creditAccount) throw new AccountNoFoundError(creditAccountNumber)
 
         await accountRepository.makeTransaction(debitAccountNumber, creditAccountNumber, amount)
     }
