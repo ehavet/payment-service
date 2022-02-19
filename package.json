@@ -1,10 +1,10 @@
 {
-  "name": "node-api-express-bootstrap",
+  "name": "payment-service",
   "version": "0.0.0",
   "type": "module",
-  "description": "An Node API bootstrap with Express.js",
+  "description": "An payment sample API with Express.js",
   "main": "src/app.js",
-  "repository": "/node-api-bootstrap-with-expressjs",
+  "repository": "/payment-service",
   "author": "OCTO",
   "license": "UNLICENSED",
   "scripts": {
