@@ -1,10 +1,10 @@
 const accounts = [
-    {number: 'R4CL0', balance: 5000},
-    {number: 'R4CH0', balance: 6000},
-    {number: 'CH3M0', balance: 800},
-    {number: 'CL0D0', balance: 3000},
-    {number: 'TR150', balance: 9000},
-    {number: 'PR010', balance: 30000}]
+    {number: 'R4CH0', balance: 8000},
+    {number: 'R4CL0', balance: 10000},
+    {number: 'C4SS0', balance: 3000},
+    {number: 'CL0D0', balance: 100},
+    {number: 'D34L0', balance: 100000},
+    {number: 'PR010', balance: 2000}]
 
 export class AccountRepository {
     async get(accountNumber) {
