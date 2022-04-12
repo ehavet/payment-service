@@ -6,6 +6,8 @@ const accounts = [
     {number: 'D34L0', balance: 100000},
     {number: 'PR010', balance: 2000}]
 
+export const COMPANY_ACCOUNT_NUMBER = 'D34L0'
+
 export class AccountRepository {
     async get(accountNumber) {
         return accounts.find(account => account.number === accountNumber.toUpperCase())

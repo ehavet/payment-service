@@ -1,14 +1,14 @@
 import {AccountNoFoundError, InsufficientBalanceError} from './payments.errors.js'
+import {COMPANY_ACCOUNT_NUMBER} from '../infrastructure/account.repository.js'
 
-export function createPaymentUsecaseFactory(accountRepository) {
-    return async (debitAccountNumber, creditAccountNumber, amount) => {
-        const debitAccount = await accountRepository.get(debitAccountNumber)
-        if (!debitAccount) throw new AccountNoFoundError(debitAccountNumber)
-        if (debitAccount.balance < amount) throw new InsufficientBalanceError(debitAccountNumber)
-
-        const creditAccount = await accountRepository.get(creditAccountNumber)
-        if (!creditAccount) throw new AccountNoFoundError(creditAccountNumber)
-
-        await accountRepository.makeTransaction(debitAccountNumber, creditAccountNumber, amount)
+export function createPaymentUsecaseFactory(accountRepository, itemRepository) {
+    return async (clientId, itemId, quantity) => {
+        const item = await itemRepository.get(itemId)
+        const amount = item.price * parseInt(quantity)
+        const debitAccount = await accountRepository.get(clientId)
+        if (!debitAccount) throw new AccountNoFoundError(debitAccount.number)
+        if (debitAccount.balance < amount) throw new InsufficientBalanceError(debitAccount.number)
+        
+        await accountRepository.makeTransaction(debitAccount.number, COMPANY_ACCOUNT_NUMBER, amount)
     }
 }

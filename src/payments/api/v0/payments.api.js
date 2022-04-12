@@ -30,12 +30,12 @@ export default function (router, container) {
         })
 
     router.post('/v0/payments/',
-        body('debit_account_number').trim().notEmpty().withMessage('debit account number must be provided'),
-        body('debit_account_number').trim().isString().withMessage('debit account number must be a string'),
-        body('credit_account_number').trim().notEmpty().withMessage('credit account number must be provided'),
-        body('credit_account_number').trim().isString().withMessage('credit account number must be a string'),
-        body('amount').trim().notEmpty().withMessage('amount must be provided'),
-        body('amount').isNumeric().withMessage('amount must be an integer'),
+        body('client_id').trim().notEmpty().withMessage('client_id must be provided'),
+        body('client_id').trim().isString().withMessage('client_id must be a string'),
+        body('item_id').trim().notEmpty().withMessage('item_id must be provided'),
+        body('item_id').trim().isString().withMessage('item_id must be a string'),
+        body('quantity').trim().notEmpty().withMessage('quantity must be provided'),
+        body('quantity').isNumeric().withMessage('quantity must be an integer'),
         async function (req, res) {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
@@ -45,9 +45,9 @@ export default function (router, container) {
 
             try {
                 await container.CreatePayment(
-                    req.body.debit_account_number,
-                    req.body.credit_account_number,
-                    parseInt(req.body.amount)
+                    req.body.client_id,
+                    req.body.item_id,
+                    parseInt(req.body.quantity)
                 )
                 res.status(201).send()
             } catch (error) {
